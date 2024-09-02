@@ -1,12 +1,11 @@
-package com.dilaefendioglu.artify
+package com.dilaefendioglu.artify.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dilaefendioglu.artify.api.LexicaApi
-import com.dilaefendioglu.artify.data.Image
-import com.dilaefendioglu.artify.data.ImageResponse
+import com.dilaefendioglu.artify.data.api.LexicaApi
+import com.dilaefendioglu.artify.data.response.Image
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
@@ -28,10 +27,14 @@ class MainViewModel : ViewModel() {
             _isLoading.value = true
             try {
                 val response = lexicaService.getImages(query)
-                if (response.isSuccessful && response.body() != null) {
-                    val imageResponses = response.body()!!.images
-                    _images.value = imageResponses
-                    _hasError.value = false
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        val imageResponses = it.images
+                        _images.value = imageResponses
+                        _hasError.value = false
+                    } ?: run {
+                        _hasError.value = true
+                    }
                 } else {
                     _hasError.value = true
                 }

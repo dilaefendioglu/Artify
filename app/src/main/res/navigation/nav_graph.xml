@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.dilaefendioglu.artify.fragment.ListFragment"
+        android:name="com.dilaefendioglu.artify.view.fragment.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.dilaefendioglu.artify.fragment.DetailFragment"
+        android:name="com.dilaefendioglu.artify.view.fragment.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument

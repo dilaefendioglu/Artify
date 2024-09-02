@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Artify</string>
     <string name="recycler_view_description">List of images</string>
+    <string name="error_name">Error</string>
+    <string name="is_loading_name">is loading</string>
+    <string name="save_name">Save</string>
+    <string name="cancel_name">Cancel</string>
+    <string name="artify_name">Artify AI</string>
+    <string name="enter_image_name">Enter image description</string>
+    <string name="generate_name">Generate</string>
+
 </resources>

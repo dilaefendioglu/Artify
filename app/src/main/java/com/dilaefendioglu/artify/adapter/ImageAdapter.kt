@@ -3,7 +3,7 @@ package com.dilaefendioglu.artify.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dilaefendioglu.artify.data.Image
+import com.dilaefendioglu.artify.data.response.Image
 import com.dilaefendioglu.artify.databinding.ItemImageBinding
 import com.dilaefendioglu.artify.utils.setImageUrl
 

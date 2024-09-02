@@ -1,4 +1,4 @@
-package com.dilaefendioglu.artify.fragment
+package com.dilaefendioglu.artify.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.Visibility
-import com.dilaefendioglu.artify.MainViewModel
 import com.dilaefendioglu.artify.adapter.ImageAdapter
 import com.dilaefendioglu.artify.databinding.FragmentListBinding
+import com.dilaefendioglu.artify.utils.Constants
+import com.dilaefendioglu.artify.utils.hideKeyboard
+import com.dilaefendioglu.artify.viewmodel.MainViewModel
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
@@ -35,7 +35,8 @@ class ListFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        binding.recyclerViewImage.layoutManager = GridLayoutManager(requireContext(), 2) // 2 sütunlu düzen
+        binding.recyclerViewImage.layoutManager =
+            GridLayoutManager(requireContext(), Constants.GRID_SPAN_COUNT)
         binding.recyclerViewImage.adapter = adapter
         binding.loadingGif.isVisible = viewModel.isGifVisible
 
@@ -49,6 +50,7 @@ class ListFragment : Fragment() {
         binding.generateButton.setOnClickListener {
             val query = binding.searchEditText.text.toString().trim()
             if (query.isNotEmpty()) {
+                hideKeyboard()
                 binding.loadingGif.isVisible = false
                 viewModel.isGifVisible = false
                 viewModel.fetchImages(query)

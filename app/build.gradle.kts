@@ -61,5 +61,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation (libs.picasso)
     implementation(libs.android.gif.drawable)
-
+    implementation(libs.androidx.core.splashscreen)
 }

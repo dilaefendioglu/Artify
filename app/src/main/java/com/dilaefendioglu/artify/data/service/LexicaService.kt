@@ -1,6 +1,6 @@
-package com.dilaefendioglu.artify.service
+package com.dilaefendioglu.artify.data.service
 
-import com.dilaefendioglu.artify.data.ImageResponse
+import com.dilaefendioglu.artify.data.response.ImageResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
