@@ -12,7 +12,6 @@ object Constants {
     const val ERROR_PASSWORD_RESET = "Please enter your email"
     const val ERROR_UNKNOWN = "Unknown error"
     const val SUCCESS_PASSWORD_RESET = "Password reset email sent"
-    const val ERROR_SIGN_IN = "Error! Please try again"
     const val SUCCESS_SIGN_IN = "User login successful"
     const val ERROR_SOMETHING_WENT_WRONG = "Something went wrong"
     const val USERNAME_MAX_LENGTH = "Maximum length is 10"
@@ -20,6 +19,7 @@ object Constants {
     const val PASSWORD_MAX_LENGTH = "Maximum length is 15"
     const val PASSWORD_MIN_LENGTH = "Minimum length is 6"
     const val SUCCESS_USER_CREATED = "User created successfully"
+    const val GENERIC_ERROR = "An unexpected error occurred"
 
 
 }

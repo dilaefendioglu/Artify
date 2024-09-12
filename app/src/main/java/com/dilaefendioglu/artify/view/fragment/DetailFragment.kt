@@ -117,7 +117,7 @@ class DetailFragment : Fragment() {
                 "Downloaded_Image_${System.currentTimeMillis()}.jpg"
             )
             put(MediaStore.Images.Media.MIME_TYPE, Constants.IMAGE_MIME_TYPE)
-            put(MediaStore.Images.Media.RELATIVE_PATH,Constants.IMAGE_RELATIVE_PATH)
+            put(MediaStore.Images.Media.RELATIVE_PATH, Constants.IMAGE_RELATIVE_PATH)
         }
 
         val uri = requireContext().contentResolver.insert(

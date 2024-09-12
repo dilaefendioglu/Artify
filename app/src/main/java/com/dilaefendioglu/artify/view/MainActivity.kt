@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -57,11 +58,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
-            binding.txtLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.txtLoading.isVisible = isLoading
         }
 
         viewModel.hasError.observe(this) { hasError ->
-            binding.txtError.visibility = if (hasError) View.VISIBLE else View.GONE
+            binding.txtError.isVisible = hasError
         }
     }
 }

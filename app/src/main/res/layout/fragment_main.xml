@@ -24,7 +24,7 @@
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Transform your words into works of art with Artify and discover your imagination!"
+        android:text="@string/info_name"
         android:textAlignment="center"
         android:textColor="@color/dark_blue"
         android:textSize="@dimen/text_size_15"
@@ -36,13 +36,12 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/buton_size_300"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="@dimen/spacing_28"
         android:backgroundTint="@color/dark_blue"
         android:text="LOGIN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
 

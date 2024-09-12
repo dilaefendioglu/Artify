@@ -1,6 +1,5 @@
 package com.dilaefendioglu.artify.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -8,23 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dilaefendioglu.artify.R
 import com.dilaefendioglu.artify.databinding.FragmentLoginBinding
 import com.dilaefendioglu.artify.utils.Constants
-import com.google.firebase.auth.FirebaseAuth
+import com.dilaefendioglu.artify.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var auth: FirebaseAuth
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        auth = FirebaseAuth.getInstance()
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding.animationView.setAnimation(R.raw.login_anim)
         binding.animationView.playAnimation()
@@ -43,35 +43,28 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            auth.signInWithEmailAndPassword(userEmail, userPass).addOnCompleteListener { task ->
-                try {
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            requireContext(),
-                           Constants.SUCCESS_SIGN_IN,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        findNavController().navigate(R.id.action_loginFragment_to_listFragment)
-                        val email = binding.logEmail.text
-                        val sharedPref = getActivity()?.getPreferences(Context.MODE_PRIVATE)
-                            ?: return@addOnCompleteListener
-                        with(sharedPref.edit()) {
-                            putString(Constants.USER_EMAIL, email.toString())
-                            apply()
-                        }
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Error! ${task.exception?.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(requireContext(), Constants.ERROR_SOMETHING_WENT_WRONG, Toast.LENGTH_SHORT)
+            loginViewModel.signInWithEmailAndPassword(userEmail, userPass)
+
+            loginViewModel.signInSuccess.observe(viewLifecycleOwner) { success ->
+                if (success) {
+                    Toast.makeText(
+                        requireContext(),
+                        Constants.SUCCESS_SIGN_IN,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_listFragment)
+                    loginViewModel.saveUserEmail(userEmail)
+                }
+            }
+
+            loginViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+                if (errorMessage != null) {
+                    Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
         }
+
         binding.forgotPassword.setOnClickListener {
             val email = binding.logEmail.text.toString().trim()
 
@@ -79,24 +72,27 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), Constants.ERROR_PASSWORD_RESET, Toast.LENGTH_SHORT)
                     .show()
             } else {
-                auth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(
-                                requireContext(),
-                                Constants.SUCCESS_PASSWORD_RESET,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Error: ${task.exception?.message ?: Constants.ERROR_UNKNOWN}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                loginViewModel.sendPasswordResetEmail(email)
+
+                loginViewModel.signInSuccess.observe(viewLifecycleOwner) { success ->
+                    if (success) {
+                        Toast.makeText(
+                            requireContext(),
+                            Constants.SUCCESS_PASSWORD_RESET,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+                }
+
+                loginViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+                    if (errorMessage != null) {
+                        Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
             }
         }
+
         return binding.root
     }
 }

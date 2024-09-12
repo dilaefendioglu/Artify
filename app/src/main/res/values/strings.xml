@@ -19,5 +19,6 @@
     <string name="password_name">Password</string>
     <string name="sign_up_name">SIGN UP</string>
     <string name="log_out_name">Logout</string>
+    <string name="info_name">Transform your words into works of art with Artify and discover your imagination!</string>
 
 </resources>

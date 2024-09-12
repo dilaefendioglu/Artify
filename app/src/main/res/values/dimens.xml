@@ -4,6 +4,7 @@
     <dimen name="spacing_0">0dp</dimen>
     <dimen name="spacing_8">8dp</dimen>
     <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_28">28dp</dimen>
     <dimen name="spacing_32">32dp</dimen>
     <dimen name="spacing_40">40dp</dimen>
     <dimen name="spacing_54">54dp</dimen>
@@ -18,6 +19,7 @@
     <dimen name="spacing_300">300dp</dimen>
     <dimen name="spacing_70">70dp</dimen>
     <dimen name="spacing_225">225dp</dimen>
+    <dimen name="spacing_75">75dp</dimen>
 
     <!-- size -->
     <dimen name="text_size_15">15sp</dimen>
