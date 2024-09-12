@@ -50,25 +50,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imgArt">
 
-                <Button
-                    android:id="@+id/saveButton"
-                    android:layout_width="@dimen/buton_size_74"
+                <ImageButton
+                    android:id="@+id/downloadButton"
+                    android:layout_width="@dimen/buton_size_50"
                     android:layout_height="@dimen/buton_size_50"
                     android:layout_marginEnd="@dimen/spacing_8"
-                    android:backgroundTint="@color/blue"
-                    android:padding="@dimen/layout_padding8"
-                    android:text="@string/save_name" />
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/download_name"
+                    android:src="@drawable/download" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/cancelButton"
-                    android:layout_width="@dimen/buton_size_74"
+                    android:layout_width="@dimen/buton_size_50"
                     android:layout_height="@dimen/buton_size_50"
-                    android:backgroundTint="@color/red"
-                    android:padding="@dimen/layout_padding8"
-                    android:text="@string/cancel_name" />
+                    android:layout_marginEnd="@dimen/spacing_8"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/cancel_name"
+                    android:src="@drawable/cancel" />
+
+                <ImageButton
+                    android:id="@+id/favoriteButton"
+                    android:layout_width="@dimen/buton_size_50"
+                    android:layout_height="@dimen/buton_size_50"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/favorite_name"
+                    android:src="@drawable/like" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

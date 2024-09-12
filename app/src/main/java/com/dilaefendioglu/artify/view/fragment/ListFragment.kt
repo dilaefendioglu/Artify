@@ -9,15 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dilaefendioglu.artify.R
 import com.dilaefendioglu.artify.adapter.ImageAdapter
 import com.dilaefendioglu.artify.databinding.FragmentListBinding
 import com.dilaefendioglu.artify.utils.Constants
 import com.dilaefendioglu.artify.utils.hideKeyboard
 import com.dilaefendioglu.artify.viewmodel.MainViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
     private val viewModel: MainViewModel by viewModels()
+    private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +43,6 @@ class ListFragment : Fragment() {
         binding.recyclerViewImage.adapter = adapter
         binding.loadingGif.isVisible = viewModel.isGifVisible
 
-
         viewModel.images.observe(viewLifecycleOwner) { images ->
             if (images != null) {
                 adapter.updateData(images)
@@ -55,6 +57,11 @@ class ListFragment : Fragment() {
                 viewModel.isGifVisible = false
                 viewModel.fetchImages(query)
             }
+        }
+
+        binding.logoutIcon.setOnClickListener {
+            firebaseAuth.signOut()
+            findNavController().navigate(R.id.action_listFragment_to_mainFragment)
         }
     }
 }

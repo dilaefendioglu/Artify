@@ -10,17 +10,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.dilaefendioglu.artify.R
 import com.dilaefendioglu.artify.databinding.FragmentDetailBinding
+import com.dilaefendioglu.artify.utils.Constants
 import com.dilaefendioglu.artify.utils.setImageUrl
+import com.dilaefendioglu.artify.viewmodel.DetailViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 import java.io.OutputStream
 
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
     private val args: DetailFragmentArgs by navArgs()
+    private val viewModel: DetailViewModel by viewModels()
+    private var isFavorite = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,17 +41,59 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.imgArt.setImageUrl(args.src)
+        checkIfFavorite(args.src)
         setupClickListeners()
     }
 
     private fun setupClickListeners() {
-        binding.saveButton.setOnClickListener {
+        binding.downloadButton.setOnClickListener {
             saveImageToGallery(args.src)
         }
 
         binding.cancelButton.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.favoriteButton.setOnClickListener {
+            if (isFavorite) {
+                removeFromFavorites(args.src)
+            } else {
+                addToFavorites(args.src)
+            }
+            updateFavoriteStatus()
+        }
+    }
+
+    private fun checkIfFavorite(imageUrl: String) {
+        viewModel.getFavorites().observe(viewLifecycleOwner) { favorites ->
+            isFavorite = favorites.any { it.imageUrl == imageUrl }
+            toggleFavoriteIcon()
+        }
+    }
+
+    private fun addToFavorites(imageUrl: String) {
+        lifecycleScope.launch {
+            viewModel.addToFavorites(imageUrl)
+        }
+    }
+
+    private fun removeFromFavorites(imageUrl: String) {
+        lifecycleScope.launch {
+            viewModel.removeFromFavorites(imageUrl)
+        }
+    }
+
+    private fun updateFavoriteStatus() {
+        checkIfFavorite(args.src)
+    }
+
+    private fun toggleFavoriteIcon() {
+        val favoriteIcon = if (isFavorite) {
+            R.drawable.heart
+        } else {
+            R.drawable.like
+        }
+        binding.favoriteButton.setImageResource(favoriteIcon)
     }
 
     private fun saveImageToGallery(imageUrl: String) {
@@ -66,8 +116,8 @@ class DetailFragment : Fragment() {
                 MediaStore.Images.Media.DISPLAY_NAME,
                 "Downloaded_Image_${System.currentTimeMillis()}.jpg"
             )
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Artify")
+            put(MediaStore.Images.Media.MIME_TYPE, Constants.IMAGE_MIME_TYPE)
+            put(MediaStore.Images.Media.RELATIVE_PATH,Constants.IMAGE_RELATIVE_PATH)
         }
 
         val uri = requireContext().contentResolver.insert(

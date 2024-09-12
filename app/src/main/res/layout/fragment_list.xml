@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="@dimen/spacing_0"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/card_elevation_8"
         app:layout_constraintBottom_toTopOf="@id/recyclerViewImage"
@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutInsideCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/gradient_background"
@@ -47,7 +48,7 @@
 
             <Button
                 android:id="@+id/generateButton"
-                android:layout_width="@dimen/buton_size_0"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_32"
                 android:backgroundTint="@color/dark_blue"
@@ -57,16 +58,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/searchEditText" />
 
+            <ImageView
+                android:id="@+id/logoutIcon"
+                android:layout_width="@dimen/image_size_40"
+                android:layout_height="@dimen/image_size_40"
+                android:clickable="true"
+                android:contentDescription="@string/log_out_name"
+                android:focusable="true"
+                android:src="@drawable/logout__4_"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewImage"
-        android:layout_width="@dimen/spacing_0"
-        android:layout_height="@dimen/spacing_0"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/spacing_54"
-        android:contentDescription="List of images displayed in the gallery"
+        android:contentDescription="@string/List_of_images"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/loadingGif"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_32"
         android:layout_marginEnd="@dimen/spacing_32"
-        android:layout_marginBottom="@dimen/spacing_40"
+        android:layout_marginBottom="@dimen/spacing_70"
         android:src="@drawable/loading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,3 +100,4 @@
         app:layout_constraintTop_toBottomOf="@id/recyclerViewImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,4 +1,5 @@
 <resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_name">Artify</string>
     <string name="recycler_view_description">List of images</string>
     <string name="error_name">Error</string>
@@ -8,7 +9,15 @@
     <string name="artify_name">Artify AI</string>
     <string name="enter_image_name">Enter image description</string>
     <string name="generate_name">Generate</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="download_name">download</string>
+    <string name="favorite_name">favorite</string>
+    <string name="List_of_images">List of images </string>
+    <string name="login_name">LOGIN</string>
+    <string name="register_name">REGISTER</string>
+    <string name="user_name">Username</string>
+    <string name="email_name">E-mail</string>
+    <string name="password_name">Password</string>
+    <string name="sign_up_name">SIGN UP</string>
+    <string name="log_out_name">Logout</string>
 
 </resources>

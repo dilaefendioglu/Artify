@@ -8,18 +8,32 @@
     <dimen name="spacing_40">40dp</dimen>
     <dimen name="spacing_54">54dp</dimen>
     <dimen name="spacing_60">60dp</dimen>
+    <dimen name="spacing_150">150dp</dimen>
+    <dimen name="spacing_250">250dp</dimen>
+    <dimen name="spacing_50">50dp</dimen>
+    <dimen name="spacing_25">25dp</dimen>
+    <dimen name="spacing_100">100dp</dimen>
+    <dimen name="spacing_120">120dp</dimen>
+    <dimen name="spacing_10">10dp</dimen>
+    <dimen name="spacing_300">300dp</dimen>
+    <dimen name="spacing_70">70dp</dimen>
+    <dimen name="spacing_225">225dp</dimen>
 
     <!-- size -->
     <dimen name="text_size_15">15sp</dimen>
     <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
 
     <dimen name="image_size_0">0dp</dimen>
+    <dimen name="image_size_40">40dp</dimen>
     <dimen name="image_size_230">230dp</dimen>
     <dimen name="image_size_400">400dp</dimen>
 
     <dimen name="buton_size_0">0dp</dimen>
     <dimen name="buton_size_50">50dp</dimen>
     <dimen name="buton_size_74">74dp</dimen>
+    <dimen name="buton_size_225">225dp</dimen>
+    <dimen name="buton_size_300">300dp</dimen>
 
     <dimen name="edit_size_50">50dp</dimen>
 
@@ -28,6 +42,7 @@
     <dimen name="card_elevation_4">4dp</dimen>
     <dimen name="card_elevation_8">8dp</dimen>
     <dimen name="layout_padding8">8dp</dimen>
+    <dimen name="layout_padding12">12dp</dimen>
     <dimen name="layout_padding16">16dp</dimen>
 
 </resources>

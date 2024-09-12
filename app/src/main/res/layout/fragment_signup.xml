@@ -2,118 +2,79 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    android:padding="16dp"
-    tools:context=".LoginFragment">
+    android:background="@color/white"
+    android:padding="@dimen/layout_padding16"
+    tools:context=".view.fragment.SignupFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_300"
+        android:layout_marginTop="@dimen/spacing_70"
+        app:layout_constraintBottom_toTopOf="@id/etUsername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/signup_anim" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        android:layout_marginTop="@dimen/spacing_70"
+        android:background="@color/light_blue"
+        android:drawableStart="@drawable/user"
+        android:hint="@string/user_name"
+        android:inputType="text"
+        android:padding="@dimen/layout_padding12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/animationView" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@color/light_blue"
+        android:drawableStart="@drawable/mail"
+        android:hint="@string/email_name"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/layout_padding12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etUsername" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@color/light_blue"
+        android:drawableStart="@drawable/lock"
+        android:hint="@string/password_name"
+        android:inputType="textPassword"
+        android:padding="@dimen/layout_padding12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="@dimen/spacing_225"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_32"
+        android:layout_marginEnd="@dimen/spacing_32"
+        android:backgroundTint="@color/dark_blue"
+        android:text="@string/sign_up_name"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_background"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tvSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SIGN UP"
-                android:textColor="@android:color/white"
-                android:textSize="40sp"
-                app:layout_constraintBottom_toTopOf="@id/etUsername"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/etUsername"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/user"
-                android:drawablePadding="8dp"
-                android:hint="Username"
-                android:inputType="text"
-                android:padding="12dp"
-                app:layout_constraintBottom_toTopOf="@id/etEmail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSignUp" />
-
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/mail"
-                android:drawablePadding="8dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:padding="12dp"
-                app:layout_constraintBottom_toTopOf="@id/etPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etUsername" />
-
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/lock"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="12dp"
-                app:layout_constraintBottom_toTopOf="@id/btnRegister"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etEmail" />
-
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:backgroundTint="@color/dark_blue"
-                android:text="Create Account"
-                android:textColor="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etPassword" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

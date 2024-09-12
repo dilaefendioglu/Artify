@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs")
     alias(libs.plugins.google.gms.google.services)
+    id("kotlin-kapt")
 }
 
 android {
@@ -40,7 +41,6 @@ android {
         viewBinding = true
     }
 }
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -65,4 +65,10 @@ dependencies {
     implementation (libs.picasso)
     implementation(libs.android.gif.drawable)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.lottie)
+
 }

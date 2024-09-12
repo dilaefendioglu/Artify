@@ -1,4 +1,4 @@
-package com.dilaefendioglu.artify
+package com.dilaefendioglu.artify.view.fragment
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -9,7 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.dilaefendioglu.artify.R
 import com.dilaefendioglu.artify.databinding.FragmentSignupBinding
+import com.dilaefendioglu.artify.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -27,43 +30,53 @@ class SignupFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
+        binding.animationView.setAnimation(R.raw.signup_anim)
+        binding.animationView.playAnimation()
+
         binding.btnRegister.setOnClickListener {
             val userName = binding.etUsername.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
             if (TextUtils.isEmpty(userName)) {
-                binding.etUsername.setError("Username is required")
+                binding.etUsername.setError(Constants.USERNAME_REQUIRED)
                 return@setOnClickListener
             }
 
             if (TextUtils.isEmpty(email)) {
-                binding.etEmail.setError("E-mail adress is required")
+                binding.etEmail.setError(Constants.ERROR_EMAIL_REQUIRED)
                 return@setOnClickListener
             }
 
             if (TextUtils.isEmpty(password)) {
-                binding.etPassword.setError("Password is required")
+                binding.etPassword.setError(Constants.ERROR_PASSWORD_REQUIRED)
                 return@setOnClickListener
             }
 
             if (userName.length > 10) {
-                binding.etUsername.setError("Maximum lengt is 10..")
+                binding.etUsername.setError(Constants.USERNAME_MAX_LENGTH)
+                return@setOnClickListener
             } else if (userName.length < 3) {
-                binding.etUsername.setError("Minumum lengt is 4..")
+                binding.etUsername.setError(Constants.USERNAME_MIN_LENGTH)
+                return@setOnClickListener
             }
 
             if (password.length > 15) {
-                binding.etPassword.setError("Maximum lengt is 10..")
-            } else if (userName.length < 8) {
-                binding.etPassword.setError("Minumum lengt is 4..")
+                binding.etPassword.setError(Constants.PASSWORD_MAX_LENGTH)
+                return@setOnClickListener
+            } else if (password.length < 6) {
+                binding.etPassword.setError(Constants.PASSWORD_MIN_LENGTH)
+                return@setOnClickListener
             }
-
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(requireContext(), "User created successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            Constants.SUCCESS_USER_CREATED,
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         val user = hashMapOf(
                             "username" to userName,
@@ -76,14 +89,25 @@ class SignupFragment : Fragment() {
                             db.collection("users").document(userID).set(user)
                                 .addOnSuccessListener {
                                     Log.d(TAG, "User profile created for userID: $userID")
+
+                                    findNavController().navigate(R.id.action_signupFragment_to_listFragment)
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Error: ${e.localizedMessage}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         }
-
                     } else {
-                        Toast.makeText(requireContext(), "Error: ${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${task.exception?.localizedMessage}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-
         }
 
         return binding.root
